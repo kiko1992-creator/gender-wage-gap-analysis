@@ -1,0 +1,119 @@
+country,year,gender,sector,education_level,avg_monthly_wage,hours_worked,age_group,data_source,wage_gap_pct,notes
+North Macedonia,2009,Female,All,All,38500,160,All,State Statistical Office,3.53,Historical baseline - smallest gap recorded
+North Macedonia,2009,Male,All,All,39900,160,All,State Statistical Office,3.53,Historical baseline
+North Macedonia,2011,Female,All,University,42000,160,25-34,ILO Study,18.5,Early 2010s university educated
+North Macedonia,2011,Male,All,University,51500,160,25-34,ILO Study,18.5,Early 2010s university educated
+North Macedonia,2014,Female,All,All,40000,160,All,ILO Study,19.0,Mid-decade data
+North Macedonia,2014,Male,All,All,49400,160,All,ILO Study,19.0,Mid-decade data
+North Macedonia,2015,Female,Private,University,40500,165,25-34,Research estimate,16.0,Pre-2020 baseline
+North Macedonia,2015,Male,Private,University,48200,165,25-34,Research estimate,16.0,Pre-2020 baseline
+North Macedonia,2016,Female,Public,University,43000,160,25-34,State Statistical Office,15.5,Public sector trend
+North Macedonia,2016,Male,Public,University,50900,160,25-34,State Statistical Office,15.5,Public sector trend
+North Macedonia,2017,Female,All,University,43500,162,25-34,Research estimate,16.2,Mid-decade university
+North Macedonia,2017,Male,All,University,51900,162,25-34,Research estimate,16.2,Mid-decade university
+North Macedonia,2018,Female,All,All,44000,160,All,UNECE/State Statistical Office,16.0,Official UNECE data
+North Macedonia,2018,Male,All,All,52400,160,All,UNECE/State Statistical Office,16.0,Official UNECE data
+North Macedonia,2019,Female,Private,University,44500,165,25-34,Research estimate,17.0,Pre-COVID
+North Macedonia,2019,Male,Private,University,53700,165,25-34,Research estimate,17.0,Pre-COVID
+North Macedonia,2020,Female,Public,University,45000,160,25-34,Sample data,13.5,COVID year - public sector
+North Macedonia,2020,Male,Public,University,52000,160,25-34,Sample data,13.5,COVID year - public sector
+North Macedonia,2020,Female,Private,University,42000,165,25-34,Sample data,27.6,COVID year - private sector
+North Macedonia,2020,Male,Private,University,58000,165,25-34,Sample data,27.6,COVID year - private sector
+North Macedonia,2020,Female,All,All,43200,162,All,Eurostat estimate,17.8,Annual average
+North Macedonia,2020,Male,All,All,52600,162,All,Eurostat estimate,17.8,Annual average
+North Macedonia,2021,Female,Public,University,46500,160,25-34,Sample data,13.1,Post-COVID recovery
+North Macedonia,2021,Male,Public,University,53500,160,25-34,Sample data,13.1,Post-COVID recovery
+North Macedonia,2021,Female,Private,High School,28000,170,35-44,Sample data,20.0,Lower education private
+North Macedonia,2021,Male,Private,High School,35000,170,35-44,Sample data,20.0,Lower education private
+North Macedonia,2021,Female,Public,High School,30000,160,35-44,Sample data,16.7,Lower education public
+North Macedonia,2021,Male,Public,High School,36000,160,35-44,Sample data,16.7,Lower education public
+North Macedonia,2022,Female,Private,University,44000,165,25-34,Sample data,26.7,Private sector university
+North Macedonia,2022,Male,Private,University,60000,165,25-34,Sample data,26.7,Private sector university
+North Macedonia,2022,Female,Public,University,48000,160,45-54,Sample data,12.7,Older workers public
+North Macedonia,2022,Male,Public,University,55000,160,45-54,Sample data,12.7,Older workers public
+North Macedonia,2022,Female,Private,High School,29500,168,25-34,Sample data,20.3,Young workers vocational
+North Macedonia,2022,Male,Private,High School,37000,168,25-34,Sample data,20.3,Young workers vocational
+North Macedonia,2022,Female,All,All,45800,163,All,UN Women estimate,17.9,Adjusted gap estimate
+North Macedonia,2022,Male,All,All,55800,163,All,UN Women estimate,17.9,Adjusted gap estimate
+North Macedonia,2023,Female,Public,University,49500,160,25-34,Sample data,13.2,Recent public sector
+North Macedonia,2023,Male,Public,University,57000,160,25-34,Sample data,13.2,Recent public sector
+North Macedonia,2023,Female,Private,University,45500,162,35-44,Sample data,21.4,Recent private sector
+North Macedonia,2023,Male,Private,University,57900,162,35-44,Sample data,21.4,Recent private sector
+North Macedonia,2023,Female,Public,High School,31000,160,35-44,Sample data,18.4,Recent vocational public
+North Macedonia,2023,Male,Public,High School,38000,160,35-44,Sample data,18.4,Recent vocational public
+North Macedonia,2023,Female,Private,High School,30000,170,45-54,Sample data,22.1,Older workers vocational
+North Macedonia,2023,Male,Private,High School,38500,170,45-54,Sample data,22.1,Older workers vocational
+North Macedonia,2023,Female,All,High School,96500,165,All,Statistical Office Serbia,26.7,Higher education workers
+North Macedonia,2023,Male,All,High School,131600,165,All,Statistical Office Serbia,26.7,Higher education workers
+Serbia,2009,Female,All,All,35000,160,All,Statistical Office Serbia,3.53,Historical baseline - smallest gap
+Serbia,2009,Male,All,All,36300,160,All,Statistical Office Serbia,3.53,Historical baseline
+Serbia,2012,Female,All,All,36500,160,All,Research estimate,8.0,Early 2010s
+Serbia,2012,Male,All,All,39700,160,All,Research estimate,8.0,Early 2010s
+Serbia,2015,Female,All,All,37000,160,All,ILO/Eurostat,5.7,Mid-decade hourly wage gap
+Serbia,2015,Male,All,All,39200,160,All,ILO/Eurostat,5.7,Mid-decade hourly wage gap
+Serbia,2016,Female,Public,University,37500,160,25-34,Research estimate,10.5,Public sector mid-decade
+Serbia,2016,Male,Public,University,41900,160,25-34,Research estimate,10.5,Public sector mid-decade
+Serbia,2017,Female,All,University,37800,162,25-34,Research estimate,11.2,University educated
+Serbia,2017,Male,All,University,42600,162,25-34,Research estimate,11.2,University educated
+Serbia,2018,Female,All,All,38500,160,All,World Bank data,10.8,Pre-COVID baseline
+Serbia,2018,Male,All,All,43200,160,All,World Bank data,10.8,Pre-COVID baseline
+Serbia,2019,Female,All,All,39000,160,All,ILO SILC survey,10.9,Log hourly wage 0.109 lower
+Serbia,2019,Male,All,All,43700,160,All,ILO SILC survey,10.9,Log hourly wage 0.109 lower
+Serbia,2020,Female,Public,University,38000,160,25-34,Sample data,19.1,COVID year
+Serbia,2020,Male,Public,University,47000,160,25-34,Sample data,19.1,COVID year
+Serbia,2020,Female,All,All,39500,161,All,ILO SILC survey,9.8,Log hourly wage 0.098 lower
+Serbia,2020,Male,All,All,43800,161,All,ILO SILC survey,9.8,Log hourly wage 0.098 lower
+Serbia,2021,Female,Private,University,36000,165,25-34,Sample data,25.0,Private sector recovery
+Serbia,2021,Male,Private,University,48000,165,25-34,Sample data,25.0,Private sector recovery
+Serbia,2021,Female,Public,University,39500,160,35-44,Research estimate,12.0,Public sector mid-career
+Serbia,2021,Male,Public,University,44900,160,35-44,Research estimate,12.0,Public sector mid-career
+Serbia,2022,Female,Public,High School,25000,160,35-44,Sample data,21.9,Vocational public sector
+Serbia,2022,Male,Public,High School,32000,160,35-44,Sample data,21.9,Vocational public sector
+Serbia,2022,Female,All,All,40000,161,All,Statistical Office estimate,11.0,Adjusted gap
+Serbia,2022,Male,All,All,44900,161,All,Statistical Office estimate,11.0,Adjusted gap
+Serbia,2023,Female,All,All,41000,160,All,World Bank estimate,12.5,Recent estimate
+Serbia,2023,Male,All,All,46900,160,All,World Bank estimate,12.5,Recent estimate
+Serbia,2023,Female,All,High School,69700,165,20-24,Statistical Office Serbia,9.1,Young workers vocational
+Serbia,2023,Male,All,High School,76700,165,20-24,Statistical Office Serbia,9.1,Young workers vocational
+Serbia,2024,Female,All,All,42000,160,All,Statistical Office Serbia,13.8,Latest available
+Serbia,2024,Male,All,All,48700,160,All,Statistical Office Serbia,13.8,Latest available
+Serbia,2024,Female,All,All,59400,165,15-19,Statistical Office Serbia,8.3,Youngest workers
+Serbia,2024,Male,All,All,64800,165,15-19,Statistical Office Serbia,8.3,Youngest workers
+Serbia,2024,Female,All,All,67800,162,35-39,Statistical Office Serbia,20.19,Peak gap age group
+Serbia,2024,Male,All,All,85000,162,35-39,Statistical Office Serbia,20.19,Peak gap age group
+Albania,2015,Female,Private,University,30000,168,25-34,Research estimate,24.0,Pre-2020 baseline
+Albania,2015,Male,Private,University,39500,168,25-34,Research estimate,24.0,Pre-2020 baseline
+Albania,2018,Female,All,University,31000,165,25-34,Eurostat estimate,23.5,Mid-period
+Albania,2018,Male,All,University,40500,165,25-34,Eurostat estimate,23.5,Mid-period
+Albania,2020,Female,Private,University,32000,168,25-34,Sample data,23.8,COVID year
+Albania,2020,Male,Private,University,42000,168,25-34,Sample data,23.8,COVID year
+Albania,2021,Female,Public,University,33500,160,25-34,Sample data,22.1,Post-COVID
+Albania,2021,Male,Public,University,43000,160,25-34,Sample data,22.1,Post-COVID
+Albania,2022,Female,All,University,34500,164,All,World Bank estimate,21.8,Recent estimate
+Albania,2022,Male,All,University,44100,164,All,World Bank estimate,21.8,Recent estimate
+Kosovo,2018,Female,Private,High School,20000,165,25-34,Research estimate,28.0,Pre-2020 baseline
+Kosovo,2018,Male,Private,High School,27800,165,25-34,Research estimate,28.0,Pre-2020 baseline
+Kosovo,2020,Female,All,All,21000,163,All,World Bank estimate,27.5,COVID year
+Kosovo,2020,Male,All,All,29000,163,All,World Bank estimate,27.5,COVID year
+Kosovo,2022,Female,Private,High School,22000,165,25-34,Sample data,24.1,Recent data
+Kosovo,2022,Male,Private,High School,29000,165,25-34,Sample data,24.1,Recent data
+Kosovo,2023,Female,All,All,23000,165,All,Research estimate,23.8,Latest estimate
+Kosovo,2023,Male,All,All,30200,165,All,Research estimate,23.8,Latest estimate
+Bosnia and Herzegovina,2018,Female,Public,University,33000,160,35-44,Research estimate,20.5,Pre-2020 baseline
+Bosnia and Herzegovina,2018,Male,Public,University,41500,160,35-44,Research estimate,20.5,Pre-2020 baseline
+Bosnia and Herzegovina,2020,Female,All,University,34000,160,All,World Bank estimate,19.8,COVID year
+Bosnia and Herzegovina,2020,Male,All,University,42400,160,All,World Bank estimate,19.8,COVID year
+Bosnia and Herzegovina,2021,Female,Public,University,35000,160,35-44,Sample data,20.5,Post-COVID
+Bosnia and Herzegovina,2021,Male,Public,University,44000,160,35-44,Sample data,20.5,Post-COVID
+Bosnia and Herzegovina,2022,Female,All,University,36000,160,All,Research estimate,19.2,Recent estimate
+Bosnia and Herzegovina,2022,Male,All,University,44600,160,All,Research estimate,19.2,Recent estimate
+Montenegro,2016,Female,Private,University,34000,162,25-34,Research estimate,16.5,Mid-decade
+Montenegro,2016,Male,Private,University,40700,162,25-34,Research estimate,16.5,Mid-decade
+Montenegro,2018,Female,All,University,35000,162,25-34,Eurostat estimate,16.3,Pre-2020
+Montenegro,2018,Male,All,University,41800,162,25-34,Eurostat estimate,16.3,Pre-2020
+Montenegro,2020,Female,All,University,36000,162,All,World Bank estimate,16.2,COVID year
+Montenegro,2020,Male,All,University,42900,162,All,World Bank estimate,16.2,COVID year
+Montenegro,2022,Female,Private,University,37000,162,25-34,Sample data,19.6,Recent data
+Montenegro,2022,Male,Private,University,46000,162,25-34,Sample data,19.6,Recent data
+Montenegro,2023,Female,All,University,38000,162,All,Research estimate,16.1,Latest - adjusted gap
+Montenegro,2023,Male,All,University,45300,162,All,Research estimate,16.1,Latest - adjusted gap

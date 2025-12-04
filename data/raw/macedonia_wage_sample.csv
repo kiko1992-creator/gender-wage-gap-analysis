@@ -1,0 +1,42 @@
+country        , year, gender, sector , education_level, avg_monthly_wage, hours_worked, age_group
+North Macedonia, 2020, Female, Public , University     ,            45000,          160, 25-34
+North Macedonia, 2020, Male  , Public , University     ,            52000,          160, 25-34
+North Macedonia, 2020, Female, Private, University     ,            42000,          165, 25-34
+North Macedonia, 2020, Male  , Private, University     ,            58000,          165, 25-34
+North Macedonia, 2021, Female, Public , University     ,            46500,             , 25-34
+North Macedonia, 2021, Male  , Public , University     ,            53500,          160, 25-34
+North Macedonia, 2021, Female, Private, High School    ,            28000,          170, 35-44
+North Macedonia, 2021, Male  , Private, High School    ,            35000,          170, 35-44
+North Macedonia, 2021, Female, Public , High School    ,            30000,          160, 35-44
+North Macedonia, 2021, Male  , Public , High School    ,            36000,          160, 35-44
+North Macedonia, 2022, Female, Private, University     ,            44000,          165, 25-34
+North Macedonia, 2022, Male  , Private, University     ,            60000,          165, 25-34
+North Macedonia, 2022, Female, Public , University     ,            48000,          160, 45-54
+North Macedonia, 2022, Male  , Public , University     ,            55000,          160, 45-54
+North Macedonia, 2022, Female, Private, High School    ,            29500,          168, 25-34
+North Macedonia, 2022, Male  , Private, High School    ,            37000,          168, 25-34
+North Macedonia, 2023, Female, Public , University     ,            49500,          160, 25-34
+North Macedonia, 2023, Male  , Public , University     ,            57000,          160, 25-34
+North Macedonia, 2023, Female, Private, University     ,            45500,          162, 35-44
+North Macedonia, 2023, Male  , Private, University     ,                 ,          162, 35-44
+North Macedonia, 2023, Female, Public , High School    ,            31000,          160, 35-44
+North Macedonia, 2023, Male  , Public , High School    ,            38000,          160, 35-44
+North Macedonia, 2023, Female, Private, High School    ,            30000,          170, 45-54
+North Macedonia, 2023, Male  , Private, High School    ,            38500,          170, 45-54
+North Macedonia, 2020, Female, Public , University     ,            45000,          160, 25-34
+Serbia         , 2020, Female, Public , University     ,            38000,          160, 25-34
+Serbia         , 2020, Male  , Public , University     ,            47000,          160, 25-34
+Serbia         , 2021, Female, Private, University     ,            36000,          165, 25-34
+Serbia         , 2021, Male  , Private, University     ,            48000,          165, 25-34
+Serbia         , 2022, Female, Public , High School    ,            25000,             , 35-44
+Serbia         , 2022, Male  , Public , High School    ,            32000,          160, 35-44
+Albania        , 2020, Female, Private, University     ,            32000,          168, 25-34
+Albania        , 2020, Male  , Private, University     ,            42000,          168, 25-34
+Albania        , 2021, Female, Public , University     ,            33500,          160, 25-34
+Albania        , 2021, Male  , Public , University     ,            43000,          160, 25-34
+Kosovo         , 2022, Female, Private, High School    ,            22000,          165, 25-34
+Kosovo         , 2022, Male  , Private, High School    ,            29000,          165, 25-34
+Bosnia         , 2021, Female, Public , University     ,            35000,          160, 35-44
+Bosnia         , 2021, Male  , Public , University     ,            44000,          160, 35-44
+Montenegro     , 2022, Female, Private, University     ,            37000,          162, 25-34
+Montenegro     , 2022, Male  , Private, University     ,            46000,          162, 25-34
