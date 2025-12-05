@@ -363,7 +363,7 @@ The comprehensive analysis notebook (`05_comprehensive_analysis.ipynb`) includes
 ---
 
 **Analysis Completed:** December 2025
-**Analyst:** Claude Code
+**Analyst:** Kiko Mickovski
 **Dataset Location:** `/data/raw/expanded_balkan_wage_data.csv`
 **Analysis Notebook:** `/notebooks/05_comprehensive_analysis.ipynb`
 **Original Sample:** `/data/raw/macedonia_wage_sample.csv`
