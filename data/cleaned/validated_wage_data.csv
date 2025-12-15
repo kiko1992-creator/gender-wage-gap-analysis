@@ -1,0 +1,147 @@
+country,year,gender,sector,education_level,avg_monthly_wage,hours_worked,age_group,data_source,wage_gap_pct,notes,reliability
+North Macedonia,2009,Female,All,All,38500.0,160,All,State Statistical Office,3.53,Historical baseline - smallest gap recorded,OFFICIAL
+North Macedonia,2009,Male,All,All,39900.0,160,All,State Statistical Office,3.53,Historical baseline,OFFICIAL
+North Macedonia,2011,Female,All,University,42000.0,160,25-34,ILO Study,18.5,Early 2010s university educated,OFFICIAL
+North Macedonia,2011,Male,All,University,51500.0,160,25-34,ILO Study,18.5,Early 2010s university educated,OFFICIAL
+North Macedonia,2014,Female,All,All,40000.0,160,All,ILO Study,19.0,Mid-decade data,OFFICIAL
+North Macedonia,2014,Male,All,All,49400.0,160,All,ILO Study,19.0,Mid-decade data,OFFICIAL
+North Macedonia,2015,Female,Private,University,40500.0,165,25-34,Research estimate,16.0,Pre-2020 baseline,RESEARCH
+North Macedonia,2015,Male,Private,University,48200.0,165,25-34,Research estimate,16.0,Pre-2020 baseline,RESEARCH
+North Macedonia,2016,Female,Public,University,43000.0,160,25-34,State Statistical Office,15.5,Public sector trend,OFFICIAL
+North Macedonia,2016,Male,Public,University,50900.0,160,25-34,State Statistical Office,15.5,Public sector trend,OFFICIAL
+North Macedonia,2017,Female,All,University,43500.0,162,25-34,Research estimate,16.2,Mid-decade university,RESEARCH
+North Macedonia,2017,Male,All,University,51900.0,162,25-34,Research estimate,16.2,Mid-decade university,RESEARCH
+North Macedonia,2018,Female,All,All,44000.0,160,All,UNECE/State Statistical Office,16.0,Official UNECE data,OFFICIAL
+North Macedonia,2018,Male,All,All,52400.0,160,All,UNECE/State Statistical Office,16.0,Official UNECE data,OFFICIAL
+North Macedonia,2019,Female,Private,University,44500.0,165,25-34,Research estimate,17.0,Pre-COVID,RESEARCH
+North Macedonia,2019,Male,Private,University,53700.0,165,25-34,Research estimate,17.0,Pre-COVID,RESEARCH
+North Macedonia,2020,Female,Public,University,45000.0,160,25-34,Sample data,13.5,COVID year - public sector,ESTIMATE
+North Macedonia,2020,Male,Public,University,52000.0,160,25-34,Sample data,13.5,COVID year - public sector,ESTIMATE
+North Macedonia,2020,Female,Private,University,42000.0,165,25-34,Sample data,27.6,COVID year - private sector,ESTIMATE
+North Macedonia,2020,Male,Private,University,58000.0,165,25-34,Sample data,27.6,COVID year - private sector,ESTIMATE
+North Macedonia,2020,Female,All,All,43200.0,162,All,Eurostat estimate,17.8,Annual average,OFFICIAL
+North Macedonia,2020,Male,All,All,52600.0,162,All,Eurostat estimate,17.8,Annual average,OFFICIAL
+North Macedonia,2021,Female,Public,University,46500.0,160,25-34,Sample data,13.1,Post-COVID recovery,ESTIMATE
+North Macedonia,2021,Male,Public,University,53500.0,160,25-34,Sample data,13.1,Post-COVID recovery,ESTIMATE
+North Macedonia,2021,Female,Private,High School,28000.0,170,35-44,Sample data,20.0,Lower education private,ESTIMATE
+North Macedonia,2021,Male,Private,High School,35000.0,170,35-44,Sample data,20.0,Lower education private,ESTIMATE
+North Macedonia,2021,Female,Public,High School,30000.0,160,35-44,Sample data,16.7,Lower education public,ESTIMATE
+North Macedonia,2021,Male,Public,High School,36000.0,160,35-44,Sample data,16.7,Lower education public,ESTIMATE
+North Macedonia,2022,Female,Private,University,44000.0,165,25-34,Sample data,26.7,Private sector university,ESTIMATE
+North Macedonia,2022,Male,Private,University,60000.0,165,25-34,Sample data,26.7,Private sector university,ESTIMATE
+North Macedonia,2022,Female,Public,University,48000.0,160,45-54,Sample data,12.7,Older workers public,ESTIMATE
+North Macedonia,2022,Male,Public,University,55000.0,160,45-54,Sample data,12.7,Older workers public,ESTIMATE
+North Macedonia,2022,Female,Private,High School,29500.0,168,25-34,Sample data,20.3,Young workers vocational,ESTIMATE
+North Macedonia,2022,Male,Private,High School,37000.0,168,25-34,Sample data,20.3,Young workers vocational,ESTIMATE
+North Macedonia,2022,Female,All,All,45800.0,163,All,UN Women estimate,17.9,Adjusted gap estimate,RESEARCH
+North Macedonia,2022,Male,All,All,55800.0,163,All,UN Women estimate,17.9,Adjusted gap estimate,RESEARCH
+North Macedonia,2023,Female,Public,University,49500.0,160,25-34,Sample data,13.2,Recent public sector,ESTIMATE
+North Macedonia,2023,Male,Public,University,57000.0,160,25-34,Sample data,13.2,Recent public sector,ESTIMATE
+North Macedonia,2023,Female,Private,University,45500.0,162,35-44,Sample data,21.4,Recent private sector,ESTIMATE
+North Macedonia,2023,Male,Private,University,57900.0,162,35-44,Sample data,21.4,Recent private sector,ESTIMATE
+North Macedonia,2023,Female,Public,High School,31000.0,160,35-44,Sample data,18.4,Recent vocational public,ESTIMATE
+North Macedonia,2023,Male,Public,High School,38000.0,160,35-44,Sample data,18.4,Recent vocational public,ESTIMATE
+North Macedonia,2023,Female,Private,High School,30000.0,170,45-54,Sample data,22.1,Older workers vocational,ESTIMATE
+North Macedonia,2023,Male,Private,High School,38500.0,170,45-54,Sample data,22.1,Older workers vocational,ESTIMATE
+North Macedonia,2023,Female,All,High School,96500.0,165,All,Statistical Office Serbia,26.7,Higher education workers,OFFICIAL
+North Macedonia,2023,Male,All,High School,131600.0,165,All,Statistical Office Serbia,26.7,Higher education workers,OFFICIAL
+Serbia,2009,Female,All,All,35000.0,160,All,Statistical Office Serbia,3.53,Historical baseline - smallest gap,OFFICIAL
+Serbia,2009,Male,All,All,36300.0,160,All,Statistical Office Serbia,3.53,Historical baseline,OFFICIAL
+Serbia,2012,Female,All,All,36500.0,160,All,Research estimate,8.0,Early 2010s,RESEARCH
+Serbia,2012,Male,All,All,39700.0,160,All,Research estimate,8.0,Early 2010s,RESEARCH
+Serbia,2015,Female,All,All,37000.0,160,All,ILO/Eurostat,5.7,Mid-decade hourly wage gap,OFFICIAL
+Serbia,2015,Male,All,All,39200.0,160,All,ILO/Eurostat,5.7,Mid-decade hourly wage gap,OFFICIAL
+Serbia,2016,Female,Public,University,37500.0,160,25-34,Research estimate,10.5,Public sector mid-decade,RESEARCH
+Serbia,2016,Male,Public,University,41900.0,160,25-34,Research estimate,10.5,Public sector mid-decade,RESEARCH
+Serbia,2017,Female,All,University,37800.0,162,25-34,Research estimate,11.2,University educated,RESEARCH
+Serbia,2017,Male,All,University,42600.0,162,25-34,Research estimate,11.2,University educated,RESEARCH
+Serbia,2018,Female,All,All,38500.0,160,All,World Bank data,10.8,Pre-COVID baseline,RESEARCH
+Serbia,2018,Male,All,All,43200.0,160,All,World Bank data,10.8,Pre-COVID baseline,RESEARCH
+Serbia,2019,Female,All,All,39000.0,160,All,ILO SILC survey,10.9,Log hourly wage 0.109 lower,OFFICIAL
+Serbia,2019,Male,All,All,43700.0,160,All,ILO SILC survey,10.9,Log hourly wage 0.109 lower,OFFICIAL
+Serbia,2020,Female,Public,University,38000.0,160,25-34,Sample data,19.1,COVID year,ESTIMATE
+Serbia,2020,Male,Public,University,47000.0,160,25-34,Sample data,19.1,COVID year,ESTIMATE
+Serbia,2020,Female,All,All,39500.0,161,All,ILO SILC survey,9.8,Log hourly wage 0.098 lower,OFFICIAL
+Serbia,2020,Male,All,All,43800.0,161,All,ILO SILC survey,9.8,Log hourly wage 0.098 lower,OFFICIAL
+Serbia,2021,Female,Private,University,36000.0,165,25-34,Sample data,25.0,Private sector recovery,ESTIMATE
+Serbia,2021,Male,Private,University,48000.0,165,25-34,Sample data,25.0,Private sector recovery,ESTIMATE
+Serbia,2021,Female,Public,University,39500.0,160,35-44,Research estimate,12.0,Public sector mid-career,RESEARCH
+Serbia,2021,Male,Public,University,44900.0,160,35-44,Research estimate,12.0,Public sector mid-career,RESEARCH
+Serbia,2022,Female,Public,High School,25000.0,160,35-44,Sample data,21.9,Vocational public sector,ESTIMATE
+Serbia,2022,Male,Public,High School,32000.0,160,35-44,Sample data,21.9,Vocational public sector,ESTIMATE
+Serbia,2022,Female,All,All,40000.0,161,All,Statistical Office estimate,11.0,Adjusted gap,ESTIMATE
+Serbia,2022,Male,All,All,44900.0,161,All,Statistical Office estimate,11.0,Adjusted gap,ESTIMATE
+Serbia,2023,Female,All,All,41000.0,160,All,World Bank estimate,12.5,Recent estimate,RESEARCH
+Serbia,2023,Male,All,All,46900.0,160,All,World Bank estimate,12.5,Recent estimate,RESEARCH
+Serbia,2023,Female,All,High School,69700.0,165,20-24,Statistical Office Serbia,9.1,Young workers vocational,OFFICIAL
+Serbia,2023,Male,All,High School,76700.0,165,20-24,Statistical Office Serbia,9.1,Young workers vocational,OFFICIAL
+Serbia,2024,Female,All,All,42000.0,160,All,Statistical Office Serbia,13.8,Latest available,OFFICIAL
+Serbia,2024,Male,All,All,48700.0,160,All,Statistical Office Serbia,13.8,Latest available,OFFICIAL
+Serbia,2024,Female,All,All,59400.0,165,15-19,Statistical Office Serbia,8.3,Youngest workers,OFFICIAL
+Serbia,2024,Male,All,All,64800.0,165,15-19,Statistical Office Serbia,8.3,Youngest workers,OFFICIAL
+Serbia,2024,Female,All,All,67800.0,162,35-39,Statistical Office Serbia,20.19,Peak gap age group,OFFICIAL
+Serbia,2024,Male,All,All,85000.0,162,35-39,Statistical Office Serbia,20.19,Peak gap age group,OFFICIAL
+Montenegro,2016,Female,Private,University,34000.0,162,25-34,Research estimate,16.5,Mid-decade,RESEARCH
+Montenegro,2016,Male,Private,University,40700.0,162,25-34,Research estimate,16.5,Mid-decade,RESEARCH
+Montenegro,2018,Female,All,University,35000.0,162,25-34,Eurostat estimate,16.3,Pre-2020,OFFICIAL
+Montenegro,2018,Male,All,University,41800.0,162,25-34,Eurostat estimate,16.3,Pre-2020,OFFICIAL
+Montenegro,2020,Female,All,University,36000.0,162,All,World Bank estimate,16.2,COVID year,RESEARCH
+Montenegro,2020,Male,All,University,42900.0,162,All,World Bank estimate,16.2,COVID year,RESEARCH
+Montenegro,2022,Female,Private,University,37000.0,162,25-34,Sample data,19.6,Recent data,ESTIMATE
+Montenegro,2022,Male,Private,University,46000.0,162,25-34,Sample data,19.6,Recent data,ESTIMATE
+Montenegro,2023,Female,All,University,38000.0,162,All,Research estimate,16.1,Latest - adjusted gap,RESEARCH
+Montenegro,2023,Male,All,University,45300.0,162,All,Research estimate,16.1,Latest - adjusted gap,RESEARCH
+Sweden,2023,Female,All,All,44400.0,160,All,Eurostat,11.2,Eurostat official 2023,OFFICIAL
+Sweden,2023,Male,All,All,50000.0,160,All,Eurostat,11.2,Eurostat official 2023,OFFICIAL
+Sweden,2022,Female,All,All,44250.0,160,All,Eurostat,11.5,Eurostat official 2022,OFFICIAL
+Sweden,2022,Male,All,All,50000.0,160,All,Eurostat,11.5,Eurostat official 2022,OFFICIAL
+Sweden,2021,Female,All,All,44400.0,160,All,Eurostat,11.2,Eurostat official 2021,OFFICIAL
+Sweden,2021,Male,All,All,50000.0,160,All,Eurostat,11.2,Eurostat official 2021,OFFICIAL
+Italy,2023,Female,All,All,48900.0,160,All,Eurostat,2.2,Eurostat official 2023,OFFICIAL
+Italy,2023,Male,All,All,50000.0,160,All,Eurostat,2.2,Eurostat official 2023,OFFICIAL
+Italy,2022,Female,All,All,48750.0,160,All,Eurostat,2.5,Eurostat official 2022,OFFICIAL
+Italy,2022,Male,All,All,50000.0,160,All,Eurostat,2.5,Eurostat official 2022,OFFICIAL
+Italy,2021,Female,All,All,47900.0,160,All,Eurostat,4.2,Eurostat official 2021,OFFICIAL
+Italy,2021,Male,All,All,50000.0,160,All,Eurostat,4.2,Eurostat official 2021,OFFICIAL
+Poland,2023,Female,All,All,46100.0,160,All,Eurostat,7.8,Eurostat official 2023,OFFICIAL
+Poland,2023,Male,All,All,50000.0,160,All,Eurostat,7.8,Eurostat official 2023,OFFICIAL
+Poland,2022,Female,All,All,46000.0,160,All,Eurostat,8.0,Eurostat official 2022,OFFICIAL
+Poland,2022,Male,All,All,50000.0,160,All,Eurostat,8.0,Eurostat official 2022,OFFICIAL
+Poland,2021,Female,All,All,47750.0,160,All,Eurostat,4.5,Eurostat official 2021,OFFICIAL
+Poland,2021,Male,All,All,50000.0,160,All,Eurostat,4.5,Eurostat official 2021,OFFICIAL
+Hungary,2023,Female,All,All,41100.0,160,All,Eurostat,17.8,Eurostat official 2023,OFFICIAL
+Hungary,2023,Male,All,All,50000.0,160,All,Eurostat,17.8,Eurostat official 2023,OFFICIAL
+Hungary,2022,Female,All,All,41350.0,160,All,Eurostat,17.3,Eurostat official 2022,OFFICIAL
+Hungary,2022,Male,All,All,50000.0,160,All,Eurostat,17.3,Eurostat official 2022,OFFICIAL
+Hungary,2021,Female,All,All,41400.0,160,All,Eurostat,17.2,Eurostat official 2021,OFFICIAL
+Hungary,2021,Male,All,All,50000.0,160,All,Eurostat,17.2,Eurostat official 2021,OFFICIAL
+Slovenia,2023,Female,All,All,47300.0,160,All,Eurostat,5.4,Eurostat official 2023,OFFICIAL
+Slovenia,2023,Male,All,All,50000.0,160,All,Eurostat,5.4,Eurostat official 2023,OFFICIAL
+Slovenia,2022,Female,All,All,48450.0,160,All,Eurostat,3.1,Eurostat official 2022,OFFICIAL
+Slovenia,2022,Male,All,All,50000.0,160,All,Eurostat,3.1,Eurostat official 2022,OFFICIAL
+Slovenia,2021,Female,All,All,48100.0,160,All,Eurostat,3.8,Eurostat official 2021,OFFICIAL
+Slovenia,2021,Male,All,All,50000.0,160,All,Eurostat,3.8,Eurostat official 2021,OFFICIAL
+Croatia,2023,Female,All,All,46300.0,160,All,Eurostat,7.4,Eurostat official 2023,OFFICIAL
+Croatia,2023,Male,All,All,50000.0,160,All,Eurostat,7.4,Eurostat official 2023,OFFICIAL
+Croatia,2022,Female,All,All,44400.0,160,All,Eurostat,11.2,Eurostat official 2022,OFFICIAL
+Croatia,2022,Male,All,All,50000.0,160,All,Eurostat,11.2,Eurostat official 2022,OFFICIAL
+Croatia,2021,Female,All,All,44250.0,160,All,Eurostat,11.5,Eurostat official 2021,OFFICIAL
+Croatia,2021,Male,All,All,50000.0,160,All,Eurostat,11.5,Eurostat official 2021,OFFICIAL
+Romania,2023,Female,All,All,48100.0,160,All,Eurostat,3.8,Eurostat official 2023,OFFICIAL
+Romania,2023,Male,All,All,50000.0,160,All,Eurostat,3.8,Eurostat official 2023,OFFICIAL
+Romania,2022,Female,All,All,48200.0,160,All,Eurostat,3.6,Eurostat official 2022,OFFICIAL
+Romania,2022,Male,All,All,50000.0,160,All,Eurostat,3.6,Eurostat official 2022,OFFICIAL
+Romania,2021,Female,All,All,48200.0,160,All,Eurostat,3.6,Eurostat official 2021,OFFICIAL
+Romania,2021,Male,All,All,50000.0,160,All,Eurostat,3.6,Eurostat official 2021,OFFICIAL
+Bulgaria,2023,Female,All,All,43250.0,160,All,Eurostat,13.5,Eurostat official 2023,OFFICIAL
+Bulgaria,2023,Male,All,All,50000.0,160,All,Eurostat,13.5,Eurostat official 2023,OFFICIAL
+Bulgaria,2022,Female,All,All,43650.0,160,All,Eurostat,12.7,Eurostat official 2022,OFFICIAL
+Bulgaria,2022,Male,All,All,50000.0,160,All,Eurostat,12.7,Eurostat official 2022,OFFICIAL
+Bulgaria,2021,Female,All,All,43900.0,160,All,Eurostat,12.2,Eurostat official 2021,OFFICIAL
+Bulgaria,2021,Male,All,All,50000.0,160,All,Eurostat,12.2,Eurostat official 2021,OFFICIAL
+Greece,2023,Female,All,All,43200.0,160,All,Eurostat,13.6,Eurostat official 2023,OFFICIAL
+Greece,2023,Male,All,All,50000.0,160,All,Eurostat,13.6,Eurostat official 2023,OFFICIAL
+Greece,2022,Female,All,All,45300.0,160,All,Eurostat,9.4,Eurostat official 2022,OFFICIAL
+Greece,2022,Male,All,All,50000.0,160,All,Eurostat,9.4,Eurostat official 2022,OFFICIAL
+Greece,2021,Female,All,All,44800.0,160,All,Eurostat,10.4,Eurostat official 2021,OFFICIAL
+Greece,2021,Male,All,All,50000.0,160,All,Eurostat,10.4,Eurostat official 2021,OFFICIAL

@@ -21,8 +21,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.io as pio
-import os
-import io
+from pathlib import Path
 
 # ============================================================
 # IMPROVEMENT #4: Dark Mode Toggle
@@ -133,20 +132,23 @@ def add_chart_export(fig, filename, key):
 # ============================================================
 # DATA LOADING
 # @st.cache_data decorator caches the result - improves performance
+# Using pathlib for cross-platform compatibility (works on Streamlit Cloud)
 # ============================================================
+
+# Get the directory where app.py is located
+APP_DIR = Path(__file__).parent
+
 @st.cache_data
 def load_main_data():
     """Load the main validated wage data"""
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(script_dir, 'data', 'cleaned', 'validated_wage_data.csv')
+    data_path = APP_DIR / 'data' / 'cleaned' / 'validated_wage_data.csv'
     df = pd.read_csv(data_path)
     return df
 
 @st.cache_data
 def load_country_data():
     """Load country-level ML data with clusters"""
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(script_dir, 'data', 'ml_country_data_clustered.csv')
+    data_path = APP_DIR / 'data' / 'ml_country_data_clustered.csv'
     df = pd.read_csv(data_path)
     return df
 
