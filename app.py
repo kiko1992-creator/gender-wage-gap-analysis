@@ -236,10 +236,10 @@ if data_loaded:
             unemp_diff = c1_data['unemployment'] - c2_data['unemployment']
             gdp_diff = c1_data['gdp_per_capita'] - c2_data['gdp_per_capita']
 
-            st.metric("", f"{gap_diff:+.1f} pp", delta_color="inverse")
-            st.metric("", f"{lfp_diff:+.1f} pp")
-            st.metric("", f"{unemp_diff:+.1f} pp", delta_color="inverse")
-            st.metric("", f"${gdp_diff:+,.0f}")
+            st.metric("Gap Diff", f"{gap_diff:+.1f} pp", delta_color="inverse", label_visibility="collapsed")
+            st.metric("LFP Diff", f"{lfp_diff:+.1f} pp", label_visibility="collapsed")
+            st.metric("Unemp Diff", f"{unemp_diff:+.1f} pp", delta_color="inverse", label_visibility="collapsed")
+            st.metric("GDP Diff", f"${gdp_diff:+,.0f}", label_visibility="collapsed")
 
         with col3:
             st.markdown(f"### {country2}")
@@ -400,15 +400,15 @@ if data_loaded:
             df_filtered = df_main[df_main['country'].isin(selected_countries)]
 
             # Aggregate by country and year
-            df_ts = df_filtered.groupby(['country', 'year', 'region'])['gap'].mean().reset_index()
+            df_ts = df_filtered.groupby(['country', 'year'])['wage_gap_pct'].mean().reset_index()
 
             fig = px.line(
                 df_ts,
                 x='year',
-                y='gap',
+                y='wage_gap_pct',
                 color='country',
                 markers=True,
-                labels={'year': 'Year', 'gap': 'Gender Pay Gap (%)', 'country': 'Country'}
+                labels={'year': 'Year', 'wage_gap_pct': 'Gender Pay Gap (%)', 'country': 'Country'}
             )
 
             fig.update_layout(height=500)
