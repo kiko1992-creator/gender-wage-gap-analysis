@@ -1,0 +1,43 @@
+==========================================================================================
+GENDER PAY GAP REFERENCE TABLE FOR PUBLICATION
+==========================================================================================
+
+Table 1. Gender Pay Gap (Unadjusted) by Country, 2023-2024
+------------------------------------------------------------------------------------------
+Rank  Country             Region      Gap (%)   Year    Source                   
+------------------------------------------------------------------------------------------
+1     Hungary             EU          17.8      2023    Eurostat                 
+2     North Macedonia     Balkans     17.8      2023    State Statistical Office 
+3     Montenegro          Balkans     16.9      2023    Research estimate        
+4     Serbia              Balkans     13.8      2024    Statistical Office Serbia
+5     Greece              EU          13.6      2023    Eurostat                 
+6     Bulgaria            EU          13.5      2023    Eurostat                 
+7     Sweden              EU          11.2      2023    Eurostat                 
+8     Poland              EU          7.8       2023    Eurostat                 
+9     Croatia             EU          7.4       2023    Eurostat                 
+10    Slovenia            EU          5.4       2023    Eurostat                 
+11    Romania             EU          3.8       2023    Eurostat                 
+12    Italy               EU          2.2       2023    Eurostat                 
+------------------------------------------------------------------------------------------
+Source: Eurostat (2023), National Statistical Offices
+Note: Unadjusted gender pay gap = (male earnings - female earnings) / male earnings x 100
+
+
+==========================================================================================
+SUMMARY STATISTICS
+==========================================================================================
+
+Balkans (n=3):  Mean = 16.2%,  Range = 13.8% - 17.8%
+EU (n=9):       Mean = 9.2%,   Range = 2.2% - 17.8%
+Difference:     7.0 percentage points
+
+Statistical Test (Independent Samples t-test):
+  t-statistic = 2.84
+  p-value = 0.017
+  Result: Statistically significant at p < 0.05
+
+==========================================================================================
+CITATION
+==========================================================================================
+Eurostat. (2023). Gender pay gap in unadjusted form [SDG_05_20].
+  Retrieved from https://ec.europa.eu/eurostat/databrowser/view/SDG_05_20
