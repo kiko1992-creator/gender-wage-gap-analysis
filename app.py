@@ -22,6 +22,14 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.io as pio
 from pathlib import Path
+from scripts.time_series import (
+    choose_best_model,
+    evaluate_models_for_country,
+    forecast_country_series,
+    prepare_country_series,
+    STATS_MODELS_AVAILABLE,
+    standardize_time_series,
+)
 
 # ============================================================
 # IMPROVEMENT #4: Dark Mode Toggle
@@ -141,21 +149,28 @@ APP_DIR = Path(__file__).parent
 @st.cache_data
 def load_main_data():
     """Load the main validated wage data"""
-    data_path = APP_DIR / 'data' / 'cleaned' / 'validated_wage_data.csv'
+    data_path = APP_DIR / 'data' / 'processed' / 'validated_wage_data.csv'
     df = pd.read_csv(data_path)
     return df
 
 @st.cache_data
 def load_country_data():
     """Load country-level ML data with clusters"""
-    data_path = APP_DIR / 'data' / 'ml_country_data_clustered.csv'
+    data_path = APP_DIR / 'data' / 'processed' / 'ml_features_clustered.csv'
     df = pd.read_csv(data_path)
     return df
+
+@st.cache_data
+def load_time_series_data():
+    """Standardize time series data for forecasting"""
+    df = load_main_data()
+    return standardize_time_series(df)
 
 # Load data
 try:
     df_main = load_main_data()
     df_country = load_country_data()
+    df_time_series = load_time_series_data()
     data_loaded = True
 except Exception as e:
     st.error(f"Error loading data: {e}")
@@ -538,57 +553,158 @@ if data_loaded:
 
         st.info("**Insight:** Higher GDP generally correlates with lower wage gaps. Bubble size represents unemployment rate - notice Balkan countries have both high unemployment and high gaps.")
 
-    # ========== TIME SERIES PAGE ==========
+    # ========== TIME SERIES PAGE (ENHANCED WITH ML MODELS) ==========
     elif page == "Time Series":
         st.header("Time Series Analysis")
-
-        # Country selection
-        available_countries = df_main['country'].unique().tolist()
-        selected_countries = st.multiselect(
-            "Select Countries to Compare",
-            available_countries,
-            default=['Serbia', 'North Macedonia']
+        st.markdown(
+            "All forecasts are built from the validated country-level series in "
+            "`data/processed/validated_wage_data.csv`, standardized to yearly wage gap (%) indices."
         )
 
-        if selected_countries:
-            df_filtered = df_main[df_main['country'].isin(selected_countries)]
-
-            # Aggregate by country and year
-            df_ts = df_filtered.groupby(['country', 'year'])['wage_gap_pct'].mean().reset_index()
-
-            fig = px.line(
-                df_ts,
-                x='year',
-                y='wage_gap_pct',
-                color='country',
-                markers=True,
-                labels={'year': 'Year', 'wage_gap_pct': 'Gender Pay Gap (%)', 'country': 'Country'}
+        if not STATS_MODELS_AVAILABLE:
+            st.warning(
+                "The `statsmodels` dependency is missing in this environment. "
+                "ARIMA and ETS results will use lightweight fallback estimators until the "
+                "package is installed (see `requirements.txt`)."
             )
 
-            fig.update_layout(height=500)
+        st.sidebar.markdown("#### Forecast validation")
+        st.sidebar.info(
+            "Rolling-origin cross-validation (1-year horizon) compares linear trend, "
+            "ARIMA(1,1,0), and additive ETS models. Metrics use MAE and MAPE; bands show "
+            "80% and 95% intervals."
+        )
+
+        available_countries = sorted(df_time_series['country'].unique().tolist())
+        default_countries = [c for c in ['Serbia', 'North Macedonia'] if c in available_countries]
+        if not default_countries and available_countries:
+            default_countries = available_countries[:2]
+
+        col_filters = st.columns([2, 1])
+        with col_filters[0]:
+            selected_countries = st.multiselect(
+                "Select Countries to Compare",
+                available_countries,
+                default=default_countries
+            )
+        with col_filters[1]:
+            forecast_horizon = st.slider(
+                "Forecast horizon (years ahead)",
+                min_value=3,
+                max_value=10,
+                value=6,
+                help="Adds rolling forecasts beyond the last observed year for each country."
+            )
+
+        if selected_countries:
+            palette = px.colors.qualitative.Bold
+
+            def hex_to_rgba(hex_color: str, alpha: float) -> str:
+                hex_color = hex_color.lstrip('#')
+                r, g, b = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+                return f"rgba({r},{g},{b},{alpha})"
+
+            fig = go.Figure()
+            summary_rows = []
+            table_notes = []
+
+            for idx, country in enumerate(selected_countries):
+                country_series = prepare_country_series(df_time_series, country)
+
+                if country_series.empty:
+                    table_notes.append(f"{country}: no validated observations available.")
+                    continue
+
+                historical_df = country_series.reset_index()
+                color = palette[idx % len(palette)]
+                dash_color = hex_to_rgba(color, 0.9)
+
+                fig.add_trace(go.Scatter(
+                    x=historical_df['year'],
+                    y=historical_df['wage_gap_pct'],
+                    mode='lines+markers',
+                    name=f"{country} actual",
+                    line=dict(color=color)
+                ))
+
+                if country_series.size < 5:
+                    table_notes.append(f"{country}: insufficient history for robust CV (needs >= 5 years).")
+                    continue
+
+                metrics = evaluate_models_for_country(country_series)
+                best_model = choose_best_model(metrics) or "linear"
+                forecast_df = forecast_country_series(
+                    country_series,
+                    best_model,
+                    horizon=forecast_horizon
+                )
+
+                fig.add_trace(go.Scatter(
+                    x=forecast_df['year'],
+                    y=forecast_df['forecast'],
+                    mode='lines+markers',
+                    name=f"{country} {best_model.upper()} forecast",
+                    line=dict(color=dash_color, dash='dash')
+                ))
+
+                fig.add_trace(go.Scatter(
+                    x=list(forecast_df['year']) + list(forecast_df['year'][::-1]),
+                    y=list(forecast_df['upper_80']) + list(forecast_df['lower_80'][::-1]),
+                    fill='toself',
+                    fillcolor=hex_to_rgba(color, 0.2),
+                    line=dict(color='rgba(255,255,255,0)'),
+                    hoverinfo='skip',
+                    name=f"{country} 80% interval",
+                    showlegend=True
+                ))
+
+                fig.add_trace(go.Scatter(
+                    x=list(forecast_df['year']) + list(forecast_df['year'][::-1]),
+                    y=list(forecast_df['upper_95']) + list(forecast_df['lower_95'][::-1]),
+                    fill='toself',
+                    fillcolor=hex_to_rgba(color, 0.1),
+                    line=dict(color='rgba(255,255,255,0)'),
+                    hoverinfo='skip',
+                    name=f"{country} 95% interval",
+                    showlegend=True
+                ))
+
+                if best_model in metrics:
+                    summary_rows.append({
+                        "Country": country,
+                        "Best model": best_model.upper(),
+                        "MAE": round(metrics[best_model]["mae"], 2),
+                        "MAPE (%)": round(metrics[best_model]["mape"] * 100, 1)
+                    })
+                else:
+                    summary_rows.append({
+                        "Country": country,
+                        "Best model": best_model.upper(),
+                        "MAE": None,
+                        "MAPE (%)": None
+                    })
+
+            fig.update_layout(
+                height=520,
+                xaxis_title="Year",
+                yaxis_title="Gender Pay Gap (%)",
+                legend_title="Series",
+                hovermode="x unified"
+            )
             st.plotly_chart(fig, width='stretch')
-            add_chart_export(fig, "time_series", "timeseries_chart")
+            add_chart_export(fig, "time_series_forecasts", "timeseries_chart")
 
-            # Trend analysis
-            st.subheader("Trend Analysis (2025-2030 Forecast)")
+            st.subheader("Model comparison (rolling-origin CV)")
+            if summary_rows:
+                st.dataframe(pd.DataFrame(summary_rows), hide_index=True, use_container_width=True)
+            if table_notes:
+                st.caption(" | ".join(table_notes))
 
-            col1, col2, col3 = st.columns(3)
-
-            forecasts = {
-                'North Macedonia': {'trend': '+0.96 pp/year', '2025': '22.9%', '2030': '27.8%', 'r2': 0.61},
-                'Serbia': {'trend': '+0.60 pp/year', '2025': '13.8%', '2030': '16.8%', 'r2': 0.85},
-                'Montenegro': {'trend': '+0.18 pp/year', '2025': '17.9%', '2030': '18.8%', 'r2': 0.12}
-            }
-
-            for i, (country, data) in enumerate(forecasts.items()):
-                with [col1, col2, col3][i]:
-                    st.markdown(f"**{country}**")
-                    st.metric("Annual Trend", data['trend'])
-                    st.metric("2025 Forecast", data['2025'])
-                    st.metric("2030 Forecast", data['2030'])
-                    st.caption(f"R² = {data['r2']}")
-
-            st.warning("**Alarming Finding:** North Macedonia's gap is increasing by almost 1 percentage point per year. At this rate, the gap will reach 28% by 2030 - more than double the EU average.")
+            st.info(
+                "We compare a linear trend baseline, ARIMA(1,1,0), and additive ETS models using "
+                "1-year rolling-origin cross-validation. Forecasts show mean projections plus 80% "
+                "and 95% confidence bands for the selected horizon."
+            )
         else:
             st.info("Please select at least one country to view time series data.")
 

@@ -1,0 +1,19 @@
+country,year,wage_gap_pct,source,reliability,notes
+Sweden,2023,11.2,Eurostat,OFFICIAL,EU Member State - Structure of Earnings Survey
+Italy,2023,2.2,Eurostat,OFFICIAL,EU Member State - lowest in EU
+Poland,2023,7.8,Eurostat,OFFICIAL,EU Member State
+Hungary,2023,17.8,Eurostat,OFFICIAL,EU Member State - among highest in EU
+Slovenia,2023,5.4,Eurostat,OFFICIAL,EU Member State
+Croatia,2023,7.4,Eurostat,OFFICIAL,EU Member State
+Romania,2023,3.8,Eurostat,OFFICIAL,EU Member State
+Bulgaria,2023,13.5,Eurostat,OFFICIAL,EU Member State
+Greece,2023,13.6,Eurostat,OFFICIAL,EU Member State
+EU Average,2023,12.0,Eurostat,OFFICIAL,EU-27 average
+EU Average,2022,12.7,Eurostat,OFFICIAL,EU-27 average
+North Macedonia,2018,16.0,UNECE/State Statistical Office,OFFICIAL,Last official measurement
+North Macedonia,2022,17.9,UN Women Research,RESEARCH,Adjusted wage gap - Western Balkans study
+Serbia,2022,11.0,Academic Research,RESEARCH,Adjusted wage gap - FREN study
+Montenegro,2022,16.1,Academic Research,RESEARCH,Adjusted wage gap - Western Balkans study
+Albania,2022,,NONE,NO_DATA,No official gender pay gap statistics available
+Kosovo,2022,,NONE,NO_DATA,No official gender pay gap statistics available
+Bosnia and Herzegovina,2022,,NONE,NO_DATA,No official gender pay gap statistics available

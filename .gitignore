@@ -21,9 +21,8 @@ build/
 *.xls
 !data/raw/*.csv
 !data/raw/*.xlsx
-!data/cleaned/*.csv
-!data/ml_country_data.csv
-!data/ml_country_data_clustered.csv
+!data/processed/*.csv
+!data/reference/*.csv
 
 # IDE
 .vscode/
