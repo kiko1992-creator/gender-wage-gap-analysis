@@ -119,12 +119,14 @@ if st.session_state.dark_mode:
     text_color = "#ffffff"
     card_bg = "#2d2d2d"
     accent_color = "#4da6ff"
+    gradient_end = "#4a4a4a"  # Dark gradient for cards
 else:
     # Light theme colors
     bg_color = "#ffffff"
     text_color = "#333333"
     card_bg = "#f0f2f6"
     accent_color = "#1f77b4"
+    gradient_end = "#e8e8e8"  # Light gradient for cards
 
 st.markdown(f"""
 <style>
@@ -180,7 +182,7 @@ st.markdown(f"""
 
     /* Country Profile Card Styling */
     .country-card {{
-        background: linear-gradient(135deg, {card_bg} 0%, {'#4a4a4a' if st.session_state.dark_mode else '#e8e8e8'} 100%);
+        background: linear-gradient(135deg, {card_bg} 0%, {gradient_end} 100%);
         border-radius: 15px;
         padding: 1.5rem;
         margin: 0.5rem 0;
