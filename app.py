@@ -22,6 +22,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.io as pio
 from pathlib import Path
+import logging
+from logging.handlers import RotatingFileHandler
+from functools import wraps
+import time
 from scripts.time_series import (
     choose_best_model,
     evaluate_models_for_country,
@@ -32,11 +36,70 @@ from scripts.time_series import (
 )
 
 # ============================================================
+# PRODUCTION IMPROVEMENT: Logging Configuration
+# Creates rotating log files to track app behavior and errors
+# ============================================================
+APP_DIR = Path(__file__).parent
+LOG_DIR = APP_DIR / 'logs'
+LOG_DIR.mkdir(exist_ok=True)
+
+# Configure logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Avoid duplicate handlers if Streamlit reruns
+if not logger.handlers:
+    # Rotating file handler (10MB max, 3 backups)
+    file_handler = RotatingFileHandler(
+        LOG_DIR / 'app.log',
+        maxBytes=10_000_000,
+        backupCount=3
+    )
+    file_handler.setLevel(logging.INFO)
+
+    # Console handler for development
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.WARNING)
+
+    # Formatter
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+logger.info("="*60)
+logger.info("Streamlit app starting")
+
+# ============================================================
+# PRODUCTION IMPROVEMENT: Performance Monitoring Decorator
+# Logs functions that take longer than 1 second
+# ============================================================
+def timing_decorator(func):
+    """Decorator to measure and log function execution time"""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        duration = time.time() - start
+        if duration > 1.0:
+            logger.warning(f"{func.__name__} took {duration:.2f}s")
+        else:
+            logger.debug(f"{func.__name__} completed in {duration:.2f}s")
+        return result
+    return wrapper
+
+# ============================================================
 # IMPROVEMENT #4: Dark Mode Toggle
 # We use session_state to persist the theme choice across reruns
 # ============================================================
 if 'dark_mode' not in st.session_state:
     st.session_state.dark_mode = False
+    logger.info("Initialized dark mode session state")
 
 # Page configuration
 st.set_page_config(
@@ -65,6 +128,7 @@ else:
 
 st.markdown(f"""
 <style>
+    /* Main Content Styling */
     .main-header {{
         font-size: 2.5rem;
         font-weight: bold;
@@ -104,6 +168,37 @@ st.markdown(f"""
         font-size: 3rem;
         text-align: center;
     }}
+
+    /* Dark Mode Sidebar Styling */
+    [data-testid="stSidebar"] {{
+        background-color: {bg_color};
+    }}
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {{
+        color: {text_color};
+    }}
+    [data-testid="stSidebar"] .css-1d391kg {{
+        color: {text_color};
+    }}
+    [data-testid="stSidebar"] label {{
+        color: {text_color} !important;
+    }}
+    [data-testid="stSidebar"] .st-emotion-cache-16idsys p {{
+        color: {text_color};
+    }}
+    /* Radio button labels in sidebar */
+    [data-testid="stSidebar"] [data-testid="stRadio"] label {{
+        color: {text_color} !important;
+    }}
+    /* Sidebar title */
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3 {{
+        color: {text_color} !important;
+    }}
+    /* Toggle widget label */
+    [data-testid="stSidebar"] [data-baseweb="checkbox"] + div {{
+        color: {text_color} !important;
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -138,42 +233,135 @@ def add_chart_export(fig, filename, key):
     )
 
 # ============================================================
+# PRODUCTION IMPROVEMENT: Input Validation Helpers
+# Validate user inputs and provide feedback
+# ============================================================
+def validate_numeric_input(value, min_val, max_val, param_name, warn_threshold=0.9):
+    """
+    Validate numeric input and warn if approaching extremes.
+
+    Parameters:
+    - value: The input value to validate
+    - min_val: Minimum allowed value
+    - max_val: Maximum allowed value
+    - param_name: Name of the parameter (for logging/messages)
+    - warn_threshold: Fraction of range to trigger warnings (default 0.9)
+
+    Returns:
+    - is_valid: Boolean indicating if value is valid
+    - message: Warning or error message (empty if valid)
+    """
+    # Check if within bounds
+    if not (min_val <= value <= max_val):
+        error_msg = f"{param_name} must be between {min_val} and {max_val}"
+        logger.warning(f"Invalid input: {param_name}={value}, {error_msg}")
+        return False, error_msg
+
+    # Check if approaching extremes (warn users)
+    range_val = max_val - min_val
+    lower_threshold = min_val + (range_val * (1 - warn_threshold))
+    upper_threshold = max_val - (range_val * (1 - warn_threshold))
+
+    if value <= lower_threshold:
+        warn_msg = f"⚠️ {param_name} is at very low end ({value}). Results may be less reliable."
+        logger.info(f"Extreme value warning: {param_name}={value} (near minimum)")
+        return True, warn_msg
+    elif value >= upper_threshold:
+        warn_msg = f"⚠️ {param_name} is at very high end ({value}). Results may be less reliable."
+        logger.info(f"Extreme value warning: {param_name}={value} (near maximum)")
+        return True, warn_msg
+
+    # Value is valid and reasonable
+    logger.debug(f"Valid input: {param_name}={value}")
+    return True, ""
+
+# ============================================================
 # DATA LOADING
-# @st.cache_data decorator caches the result - improves performance
-# Using pathlib for cross-platform compatibility (works on Streamlit Cloud)
+# PRODUCTION IMPROVEMENTS:
+# - @st.cache_data with TTL (1 hour) for automatic refresh
+# - Performance monitoring via timing_decorator
+# - Detailed logging of data loading process
+# - Specific exception handling
 # ============================================================
 
-# Get the directory where app.py is located
-APP_DIR = Path(__file__).parent
+# Cache TTL configuration (in seconds)
+CACHE_TTL = 3600  # 1 hour
 
-@st.cache_data
+@st.cache_data(ttl=CACHE_TTL, max_entries=10, show_spinner="Loading data...")
+@timing_decorator
 def load_main_data():
     """Load the main validated wage data"""
-    data_path = APP_DIR / 'data' / 'processed' / 'validated_wage_data.csv'
-    df = pd.read_csv(data_path)
-    return df
+    try:
+        data_path = APP_DIR / 'data' / 'processed' / 'validated_wage_data.csv'
+        logger.info(f"Loading main data from {data_path}")
+        df = pd.read_csv(data_path)
+        logger.info(f"Main data loaded successfully: {len(df)} records, {len(df.columns)} columns")
+        return df
+    except FileNotFoundError as e:
+        logger.error(f"Main data file not found: {e}")
+        raise
+    except pd.errors.EmptyDataError as e:
+        logger.error(f"Main data file is empty: {e}")
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error loading main data: {e}", exc_info=True)
+        raise
 
-@st.cache_data
+@st.cache_data(ttl=CACHE_TTL, max_entries=10, show_spinner="Loading country data...")
+@timing_decorator
 def load_country_data():
     """Load country-level ML data with clusters"""
-    data_path = APP_DIR / 'data' / 'processed' / 'ml_features_clustered.csv'
-    df = pd.read_csv(data_path)
-    return df
+    try:
+        data_path = APP_DIR / 'data' / 'processed' / 'ml_features_clustered.csv'
+        logger.info(f"Loading country data from {data_path}")
+        df = pd.read_csv(data_path)
+        logger.info(f"Country data loaded successfully: {len(df)} countries")
+        return df
+    except FileNotFoundError as e:
+        logger.error(f"Country data file not found: {e}")
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error loading country data: {e}", exc_info=True)
+        raise
 
-@st.cache_data
+@st.cache_data(ttl=CACHE_TTL, max_entries=10, show_spinner="Standardizing time series...")
+@timing_decorator
 def load_time_series_data():
     """Standardize time series data for forecasting"""
-    df = load_main_data()
-    return standardize_time_series(df)
+    try:
+        logger.info("Standardizing time series data")
+        df = load_main_data()
+        result = standardize_time_series(df)
+        logger.info("Time series data standardized successfully")
+        return result
+    except Exception as e:
+        logger.error(f"Error standardizing time series data: {e}", exc_info=True)
+        raise
 
-# Load data
+# Load data with improved error handling
+logger.info("Starting data load sequence")
 try:
     df_main = load_main_data()
     df_country = load_country_data()
     df_time_series = load_time_series_data()
     data_loaded = True
+    logger.info("All data loaded successfully")
+except FileNotFoundError as e:
+    error_msg = f"Data file not found: {e}"
+    logger.error(error_msg)
+    st.error(f"❌ {error_msg}")
+    st.info("💡 Please ensure data files exist in the data/processed/ directory")
+    data_loaded = False
+except pd.errors.EmptyDataError as e:
+    error_msg = f"Data file is empty: {e}"
+    logger.error(error_msg)
+    st.error(f"❌ {error_msg}")
+    data_loaded = False
 except Exception as e:
-    st.error(f"Error loading data: {e}")
+    error_msg = f"Unexpected error loading data: {type(e).__name__}: {e}"
+    logger.error(error_msg, exc_info=True)
+    st.error(f"❌ {error_msg}")
+    st.info("💡 Check logs/app.log for detailed error information")
     data_loaded = False
 
 # ============================================================
@@ -766,6 +954,45 @@ if data_loaded:
                 step=1.0,
                 help="Drag to see how female LFP changes affect the wage gap"
             )
+
+        # ============================================================
+        # PRODUCTION IMPROVEMENT: Input Validation
+        # Validate slider inputs and warn about extreme values
+        # ============================================================
+        validation_warnings = []
+
+        # Validate unemployment
+        is_valid, msg = validate_numeric_input(
+            new_unemployment, 1.0, 25.0,
+            "Unemployment Rate",
+            warn_threshold=0.85
+        )
+        if msg and msg.startswith("⚠️"):
+            validation_warnings.append(msg)
+
+        # Validate GDP
+        is_valid, msg = validate_numeric_input(
+            new_gdp, 5000, 60000,
+            "GDP per capita",
+            warn_threshold=0.85
+        )
+        if msg and msg.startswith("⚠️"):
+            validation_warnings.append(msg)
+
+        # Validate Female LFP
+        is_valid, msg = validate_numeric_input(
+            new_female_lfp, 30.0, 90.0,
+            "Female LFP",
+            warn_threshold=0.85
+        )
+        if msg and msg.startswith("⚠️"):
+            validation_warnings.append(msg)
+
+        # Display warnings if any
+        if validation_warnings:
+            for warning in validation_warnings:
+                st.warning(warning)
+            logger.info(f"What-If Analysis warnings for {selected_country}: {len(validation_warnings)} extreme values")
 
         # Calculate predicted wage gap using regression coefficients
         # From our model: gap = -51.84 + 0.95*female_lfp + 1.74*unemployment - 0.0005*gdp
