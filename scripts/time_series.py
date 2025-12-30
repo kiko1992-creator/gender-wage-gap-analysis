@@ -261,7 +261,13 @@ def _rolling_origin_cv(
                 model_type,
                 horizon=len(test_idx),
             )
-        except Exception:
+        except (ValueError, np.linalg.LinAlgError) as e:
+            # Skip this fold if model fitting fails (e.g., insufficient data, singular matrix)
+            continue
+        except Exception as e:
+            # Log unexpected errors but continue with remaining folds
+            import warnings
+            warnings.warn(f"Unexpected error in cross-validation fold for {model_type}: {e}")
             continue
 
         preds.extend(forecast_df["forecast"].tolist())
