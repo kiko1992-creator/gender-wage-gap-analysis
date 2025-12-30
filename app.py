@@ -128,6 +128,27 @@ else:
 
 st.markdown(f"""
 <style>
+    /* Main App Background */
+    .stApp {{
+        background-color: {bg_color};
+    }}
+
+    /* Main Content Area */
+    .main .block-container {{
+        background-color: {bg_color};
+        color: {text_color};
+    }}
+
+    /* All text elements */
+    .stApp, .stApp p, .stApp span, .stApp div {{
+        color: {text_color};
+    }}
+
+    /* Headers */
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {{
+        color: {text_color};
+    }}
+
     /* Main Content Styling */
     .main-header {{
         font-size: 2.5rem;
@@ -138,7 +159,7 @@ st.markdown(f"""
     }}
     .sub-header {{
         font-size: 1.2rem;
-        color: #666;
+        color: {text_color};
         text-align: center;
         margin-bottom: 2rem;
     }}
@@ -156,9 +177,10 @@ st.markdown(f"""
         color: #3498db;
         font-weight: bold;
     }}
+
     /* Country Profile Card Styling */
     .country-card {{
-        background: linear-gradient(135deg, {card_bg} 0%, #e8e8e8 100%);
+        background: linear-gradient(135deg, {card_bg} 0%, {'#4a4a4a' if st.session_state.dark_mode else '#e8e8e8'} 100%);
         border-radius: 15px;
         padding: 1.5rem;
         margin: 0.5rem 0;
@@ -169,35 +191,53 @@ st.markdown(f"""
         text-align: center;
     }}
 
-    /* Dark Mode Sidebar Styling */
+    /* Sidebar Styling */
     [data-testid="stSidebar"] {{
-        background-color: {bg_color};
+        background-color: {card_bg};
     }}
+    [data-testid="stSidebar"] > div {{
+        background-color: {card_bg};
+    }}
+
+    /* Sidebar text and elements */
+    [data-testid="stSidebar"] * {{
+        color: {text_color} !important;
+    }}
+
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {{
-        color: {text_color};
+        color: {text_color} !important;
     }}
-    [data-testid="stSidebar"] .css-1d391kg {{
-        color: {text_color};
-    }}
+
     [data-testid="stSidebar"] label {{
         color: {text_color} !important;
     }}
-    [data-testid="stSidebar"] .st-emotion-cache-16idsys p {{
-        color: {text_color};
-    }}
+
     /* Radio button labels in sidebar */
     [data-testid="stSidebar"] [data-testid="stRadio"] label {{
         color: {text_color} !important;
     }}
+
     /* Sidebar title */
     [data-testid="stSidebar"] h1,
     [data-testid="stSidebar"] h2,
     [data-testid="stSidebar"] h3 {{
         color: {text_color} !important;
     }}
-    /* Toggle widget label */
-    [data-testid="stSidebar"] [data-baseweb="checkbox"] + div {{
-        color: {text_color} !important;
+
+    /* Metric styling for dark mode */
+    [data-testid="stMetricValue"] {{
+        color: {text_color};
+    }}
+
+    /* DataFrames and tables */
+    .dataframe {{
+        background-color: {card_bg};
+        color: {text_color};
+    }}
+
+    /* Info, warning, error boxes */
+    .stAlert {{
+        background-color: {card_bg};
     }}
 </style>
 """, unsafe_allow_html=True)
