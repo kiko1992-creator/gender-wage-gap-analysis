@@ -1261,10 +1261,20 @@ if data_loaded:
         if selected_countries:
             palette = px.colors.qualitative.Bold
 
-            def hex_to_rgba(hex_color: str, alpha: float) -> str:
-                hex_color = hex_color.lstrip('#')
-                r, g, b = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
-                return f"rgba({r},{g},{b},{alpha})"
+            def hex_to_rgba(color: str, alpha: float) -> str:
+                """Convert hex or rgb color to rgba format."""
+                # If already in rgb format, convert to rgba
+                if color.startswith('rgb('):
+                    rgb_values = color.replace('rgb(', '').replace(')', '')
+                    return f"rgba({rgb_values},{alpha})"
+                # If in hex format, convert to rgba
+                elif color.startswith('#'):
+                    hex_color = color.lstrip('#')
+                    r, g, b = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+                    return f"rgba({r},{g},{b},{alpha})"
+                else:
+                    # Fallback: return as-is
+                    return color
 
             fig = go.Figure()
             summary_rows = []
