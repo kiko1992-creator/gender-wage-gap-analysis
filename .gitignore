@@ -39,3 +39,6 @@ Thumbs.db
 
 # Private research notes
 .private/
+
+# Application logs
+logs/
