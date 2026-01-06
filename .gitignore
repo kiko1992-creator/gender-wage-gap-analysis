@@ -36,3 +36,9 @@ Thumbs.db
 
 # Editor settings
 .claude/
+
+# Private research notes
+.private/
+
+# Application logs
+logs/

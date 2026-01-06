@@ -597,12 +597,9 @@ if data_loaded:
             )
 
         if selected_countries:
-            palette = px.colors.qualitative.Bold
-
-            def hex_to_rgba(hex_color: str, alpha: float) -> str:
-                hex_color = hex_color.lstrip('#')
-                r, g, b = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
-                return f"rgba({r},{g},{b},{alpha})"
+            # Use simple hex colors to avoid format conversion issues
+            colors = ['#7F3C8D', '#11A579', '#3969AC', '#F2B701', '#E73F74',
+                     '#80BA5A', '#E68310', '#008695', '#CF1C90', '#f97b72']
 
             fig = go.Figure()
             summary_rows = []
@@ -616,8 +613,8 @@ if data_loaded:
                     continue
 
                 historical_df = country_series.reset_index()
-                color = palette[idx % len(palette)]
-                dash_color = hex_to_rgba(color, 0.9)
+                color = colors[idx % len(colors)]
+                dash_color = color
 
                 fig.add_trace(go.Scatter(
                     x=historical_df['year'],
@@ -647,11 +644,16 @@ if data_loaded:
                     line=dict(color=dash_color, dash='dash')
                 ))
 
+                # Convert hex to rgba for confidence bands
+                r = int(color[1:3], 16)
+                g = int(color[3:5], 16)
+                b = int(color[5:7], 16)
+
                 fig.add_trace(go.Scatter(
                     x=list(forecast_df['year']) + list(forecast_df['year'][::-1]),
                     y=list(forecast_df['upper_80']) + list(forecast_df['lower_80'][::-1]),
                     fill='toself',
-                    fillcolor=hex_to_rgba(color, 0.2),
+                    fillcolor=f'rgba({r},{g},{b},0.2)',
                     line=dict(color='rgba(255,255,255,0)'),
                     hoverinfo='skip',
                     name=f"{country} 80% interval",
@@ -662,7 +664,7 @@ if data_loaded:
                     x=list(forecast_df['year']) + list(forecast_df['year'][::-1]),
                     y=list(forecast_df['upper_95']) + list(forecast_df['lower_95'][::-1]),
                     fill='toself',
-                    fillcolor=hex_to_rgba(color, 0.1),
+                    fillcolor=f'rgba({r},{g},{b},0.1)',
                     line=dict(color='rgba(255,255,255,0)'),
                     hoverinfo='skip',
                     name=f"{country} 95% interval",
