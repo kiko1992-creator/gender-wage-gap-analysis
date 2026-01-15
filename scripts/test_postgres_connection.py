@@ -15,16 +15,30 @@ print("=" * 60)
 # Step 1: Connect to PostgreSQL
 print("\n📡 Step 1: Connecting to database...")
 try:
-    # Connect using Unix socket (more secure for local connections)
+    # Try Unix socket first (Linux/Mac)
     conn = psycopg2.connect(
         dbname="practice_db",
         user="postgres",
-        host="/var/run/postgresql"  # Unix socket directory
+        host="/var/run/postgresql"
     )
-    print("✅ Connection successful!")
-except Exception as e:
-    print(f"❌ Connection failed: {e}")
-    exit(1)
+    print("✅ Connection successful! (Unix socket)")
+except:
+    try:
+        # Fallback to TCP/IP (Windows)
+        conn = psycopg2.connect(
+            dbname="practice_db",
+            user="postgres",
+            password="",  # Add password if needed
+            host="localhost",
+            port="5432"
+        )
+        print("✅ Connection successful! (TCP/IP - localhost)")
+    except Exception as e:
+        print(f"❌ Connection failed: {e}")
+        print("\n💡 If using Windows, you might need to:")
+        print("   1. Add password in line 26 of this script")
+        print("   2. Make sure PostgreSQL service is running")
+        exit(1)
 
 # Step 2: Create cursor (pointer to execute queries)
 print("\n🔍 Step 2: Creating cursor...")

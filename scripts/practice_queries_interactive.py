@@ -2,18 +2,29 @@
 INTERACTIVE PostgreSQL Practice
 MODIFY THE QUERIES BELOW AND RUN THIS SCRIPT TO SEE RESULTS!
 
-Run: sudo python scripts/practice_queries_interactive.py
+Run: python scripts/practice_queries_interactive.py
 """
 
 import psycopg2
 import pandas as pd
 
-# Connect to database
-conn = psycopg2.connect(
-    dbname="practice_db",
-    user="postgres",
-    host="/var/run/postgresql"
-)
+# Connect to database (works on both Windows and Linux)
+try:
+    # Try Unix socket (Linux/Mac)
+    conn = psycopg2.connect(
+        dbname="practice_db",
+        user="postgres",
+        host="/var/run/postgresql"
+    )
+except:
+    # Fallback to TCP/IP (Windows)
+    conn = psycopg2.connect(
+        dbname="practice_db",
+        user="postgres",
+        password="",  # Add password if needed
+        host="localhost",
+        port="5432"
+    )
 cur = conn.cursor()
 
 print("=" * 70)
