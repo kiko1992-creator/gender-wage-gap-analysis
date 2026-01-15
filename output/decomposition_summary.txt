@@ -1,0 +1,19 @@
+OAXACA-BLINDER DECOMPOSITION SUMMARY
+======================================================================
+
+Analysis Date: 2026-01-15
+Countries: 27
+Year: 2023
+
+KEY FINDINGS:
+- Average wage gap: 12.46%
+- Explained component: 19.02%
+- Unexplained component: 13.42%
+- Discrimination ratio: 107.7%
+
+Worst discrimination:
+  - Latvia: 111.4%
+  - Estonia: 111.0%
+  - Slovakia: 110.1%
+  - Austria: 110.0%
+  - Germany: 109.3%
