@@ -1,11 +1,13 @@
 """
 Database Connection Helper for EU Wage Gap Research
 Makes it easy to connect to PostgreSQL from anywhere in the app
+Falls back to sample data when database is unavailable (for Streamlit Cloud)
 """
 
 import psycopg2
 import pandas as pd
 from typing import Optional
+import sample_data
 
 def get_connection():
     """
@@ -39,94 +41,113 @@ def get_all_countries_2023():
     """Get all 27 EU countries with 2023 wage gap data"""
     conn = get_connection()
     if not conn:
-        return None
+        # Fallback to sample data when database is unavailable
+        return sample_data.get_sample_countries_2023()
 
-    query = """
-        SELECT
-            c.country_name,
-            c.region,
-            c.population,
-            c.gdp_billions,
-            w.wage_gap_percent
-        FROM wage_gap_data w
-        JOIN eu_countries c ON w.country_code = c.country_code
-        WHERE w.year = 2023
-        ORDER BY w.wage_gap_percent DESC
-    """
-
-    df = pd.read_sql_query(query, conn)
-    conn.close()
-    return df
+    try:
+        query = """
+            SELECT
+                c.country_name,
+                c.region,
+                c.population,
+                c.gdp_billions,
+                w.wage_gap_percent
+            FROM wage_gap_data w
+            JOIN eu_countries c ON w.country_code = c.country_code
+            WHERE w.year = 2023
+            ORDER BY w.wage_gap_percent DESC
+        """
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        return df
+    except:
+        # If query fails, use sample data
+        if conn:
+            conn.close()
+        return sample_data.get_sample_countries_2023()
 
 def get_country_trend(country_name: str):
     """Get 4-year trend for a specific country"""
     conn = get_connection()
     if not conn:
-        return None
+        # Fallback to sample data
+        return sample_data.get_sample_country_trend(country_name)
 
-    query = """
-        SELECT
-            w.year,
-            w.wage_gap_percent
-        FROM wage_gap_data w
-        JOIN eu_countries c ON w.country_code = c.country_code
-        WHERE c.country_name = %s
-        ORDER BY w.year
-    """
-
-    df = pd.read_sql_query(query, conn, params=(country_name,))
-    conn.close()
-    return df
+    try:
+        query = """
+            SELECT
+                w.year,
+                w.wage_gap_percent
+            FROM wage_gap_data w
+            JOIN eu_countries c ON w.country_code = c.country_code
+            WHERE c.country_name = %s
+            ORDER BY w.year
+        """
+        df = pd.read_sql_query(query, conn, params=(country_name,))
+        conn.close()
+        return df
+    except:
+        if conn:
+            conn.close()
+        return sample_data.get_sample_country_trend(country_name)
 
 def get_regional_comparison():
     """Get regional averages for 2023"""
     conn = get_connection()
     if not conn:
-        return None
+        return sample_data.get_sample_regional_comparison()
 
-    query = """
-        SELECT
-            c.region,
-            COUNT(DISTINCT c.country_code) as num_countries,
-            ROUND(AVG(w.wage_gap_percent), 2) as avg_gap,
-            ROUND(MIN(w.wage_gap_percent), 2) as min_gap,
-            ROUND(MAX(w.wage_gap_percent), 2) as max_gap
-        FROM wage_gap_data w
-        JOIN eu_countries c ON w.country_code = c.country_code
-        WHERE w.year = 2023
-        GROUP BY c.region
-        ORDER BY avg_gap DESC
-    """
-
-    df = pd.read_sql_query(query, conn)
-    conn.close()
-    return df
+    try:
+        query = """
+            SELECT
+                c.region,
+                COUNT(DISTINCT c.country_code) as num_countries,
+                ROUND(AVG(w.wage_gap_percent), 2) as avg_gap,
+                ROUND(MIN(w.wage_gap_percent), 2) as min_gap,
+                ROUND(MAX(w.wage_gap_percent), 2) as max_gap
+            FROM wage_gap_data w
+            JOIN eu_countries c ON w.country_code = c.country_code
+            WHERE w.year = 2023
+            GROUP BY c.region
+            ORDER BY avg_gap DESC
+        """
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        return df
+    except:
+        if conn:
+            conn.close()
+        return sample_data.get_sample_regional_comparison()
 
 def get_improvement_rankings():
     """Get countries ranked by improvement (2020 → 2023)"""
     conn = get_connection()
     if not conn:
-        return None
+        return sample_data.get_sample_improvement_rankings()
 
-    query = """
-        SELECT
-            c.country_name,
-            MAX(CASE WHEN w.year = 2020 THEN w.wage_gap_percent END) as gap_2020,
-            MAX(CASE WHEN w.year = 2023 THEN w.wage_gap_percent END) as gap_2023,
-            ROUND(
-                MAX(CASE WHEN w.year = 2023 THEN w.wage_gap_percent END) -
-                MAX(CASE WHEN w.year = 2020 THEN w.wage_gap_percent END),
-                2
-            ) as change
-        FROM wage_gap_data w
-        JOIN eu_countries c ON w.country_code = c.country_code
-        GROUP BY c.country_name
-        HAVING
-            MAX(CASE WHEN w.year = 2020 THEN w.wage_gap_percent END) IS NOT NULL
-            AND MAX(CASE WHEN w.year = 2023 THEN w.wage_gap_percent END) IS NOT NULL
-        ORDER BY change
-    """
-
-    df = pd.read_sql_query(query, conn)
-    conn.close()
-    return df
+    try:
+        query = """
+            SELECT
+                c.country_name,
+                MAX(CASE WHEN w.year = 2020 THEN w.wage_gap_percent END) as gap_2020,
+                MAX(CASE WHEN w.year = 2023 THEN w.wage_gap_percent END) as gap_2023,
+                ROUND(
+                    MAX(CASE WHEN w.year = 2023 THEN w.wage_gap_percent END) -
+                    MAX(CASE WHEN w.year = 2020 THEN w.wage_gap_percent END),
+                    2
+                ) as change
+            FROM wage_gap_data w
+            JOIN eu_countries c ON w.country_code = c.country_code
+            GROUP BY c.country_name
+            HAVING
+                MAX(CASE WHEN w.year = 2020 THEN w.wage_gap_percent END) IS NOT NULL
+                AND MAX(CASE WHEN w.year = 2023 THEN w.wage_gap_percent END) IS NOT NULL
+            ORDER BY change
+        """
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        return df
+    except:
+        if conn:
+            conn.close()
+        return sample_data.get_sample_improvement_rankings()
