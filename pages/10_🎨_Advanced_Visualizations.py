@@ -164,7 +164,7 @@ with tab2:
     selected_countries = st.multiselect(
         "Select countries to compare (2-6 recommended):",
         options=sorted(df_2023['country_name'].tolist()),
-        default=['Croatia', 'Serbia', 'Poland', 'Germany']
+        default=['Croatia', 'Poland', 'Germany', 'France']
     )
 
     if len(selected_countries) == 0:
