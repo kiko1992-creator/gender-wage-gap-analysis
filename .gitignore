@@ -42,3 +42,14 @@ Thumbs.db
 
 # Application logs
 logs/
+
+# Archived/temporary
+archive/
+.private/
+output/
+backup-*/
+README_OLD.md
+
+# Development
+*.log
+.DS_Store
