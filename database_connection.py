@@ -2,40 +2,68 @@
 Database Connection Helper for EU Wage Gap Research
 Makes it easy to connect to PostgreSQL from anywhere in the app
 Falls back to sample data when database is unavailable (for Streamlit Cloud)
+
+Supports:
+- Docker environment (reads from env vars)
+- Local Unix socket (Linux/Mac)
+- Local TCP/IP (Windows)
+- Cloud deployment (fallback to sample data)
 """
 
 import psycopg2
 import pandas as pd
 from typing import Optional
 import sample_data
+import os
 
 def get_connection():
     """
     Connect to the EU wage gap research database
-    Works on both development (Linux) and local (Windows) environments
+
+    Priority order:
+    1. Docker environment (POSTGRES_HOST env var)
+    2. Unix socket (Linux/Mac development)
+    3. TCP/IP localhost (Windows development)
+    4. Returns None (triggers sample data fallback)
     """
+    # Try Docker environment first (if running in container)
+    if os.getenv('POSTGRES_HOST'):
+        try:
+            conn = psycopg2.connect(
+                dbname=os.getenv('POSTGRES_DB', 'practice_db'),
+                user=os.getenv('POSTGRES_USER', 'postgres'),
+                password=os.getenv('POSTGRES_PASSWORD', 'postgres'),
+                host=os.getenv('POSTGRES_HOST', 'postgres'),
+                port=os.getenv('POSTGRES_PORT', '5432')
+            )
+            return conn
+        except Exception as e:
+            print(f"❌ Docker database connection failed: {e}")
+
+    # Try Unix socket (Linux/Mac - development environment)
     try:
-        # Try Unix socket (Linux/Mac - development environment)
         conn = psycopg2.connect(
-            dbname="eu_wage_gap_research",
+            dbname="practice_db",  # Updated to match Docker
             user="postgres",
             host="/var/run/postgresql"
         )
         return conn
     except:
-        try:
-            # Fallback to TCP/IP (Windows - your laptop)
-            conn = psycopg2.connect(
-                dbname="eu_wage_gap_research",
-                user="postgres",
-                password="",  # Add your password if needed
-                host="localhost",
-                port="5432"
-            )
-            return conn
-        except Exception as e:
-            print(f"❌ Database connection failed: {e}")
-            return None
+        pass
+
+    # Fallback to TCP/IP (Windows - your laptop)
+    try:
+        conn = psycopg2.connect(
+            dbname="practice_db",
+            user="postgres",
+            password="",  # Add your password if needed
+            host="localhost",
+            port="5432"
+        )
+        return conn
+    except Exception as e:
+        print(f"❌ Database connection failed: {e}")
+        return None
 
 def get_all_countries_2023():
     """Get all 27 EU countries with 2023 wage gap data"""

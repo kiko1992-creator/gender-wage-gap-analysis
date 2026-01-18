@@ -1,0 +1,77 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Development
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+docker/
+
+# Documentation
+*.md
+docs/
+DEPLOYMENT.md
+INFRASTRUCTURE.md
+VSCODE_SETUP.md
+
+# Data and backups (don't include in image)
+data/raw/
+backups/
+*.csv
+*.xlsx
+*.sql
+*.db
+
+# Notebooks
+notebooks/
+*.ipynb
+.ipynb_checkpoints/
+
+# Tests
+tests/
+pytest.ini
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Archives
+*.zip
+*.tar.gz
+archive/
+
+# Logs
+*.log
+logs/
