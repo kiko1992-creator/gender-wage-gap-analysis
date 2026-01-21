@@ -172,6 +172,15 @@ def load_panel_data():
     """Load complete panel dataset"""
     df_2023 = get_all_countries_2023()
 
+    # Ensure df_2023 is a DataFrame
+    if not isinstance(df_2023, pd.DataFrame):
+        st.error("Unable to load country data. Please check database connection.")
+        return pd.DataFrame()
+
+    if df_2023.empty or 'country_name' not in df_2023.columns:
+        st.warning("No country data available.")
+        return pd.DataFrame()
+
     panel_data = []
     for country in df_2023['country_name'].tolist():
         trend = get_country_trend(country)

@@ -7,6 +7,24 @@ Simple guide to run the Gender Wage Gap Analysis project using Docker.
 - Docker Desktop installed ([Download here](https://www.docker.com/products/docker-desktop))
 - That's it! No need to install Python, PostgreSQL, or any dependencies manually.
 
+## 🚨 IMPORTANT: If You're Having Errors
+
+If you're seeing **ModuleNotFoundError** or **AttributeError** after pulling new code, you need a **complete rebuild**:
+
+### Windows (PowerShell):
+```powershell
+.\rebuild-docker.ps1
+```
+
+### Linux/Mac:
+```bash
+./rebuild-docker.sh
+```
+
+**What this does:** Completely removes old containers, images, and build cache, then rebuilds everything from scratch with the latest code and dependencies.
+
+---
+
 ## Quick Start (3 Simple Steps)
 
 ### 1. Start Everything
