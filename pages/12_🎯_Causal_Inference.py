@@ -513,10 +513,17 @@ with tab3:
     """)
 
     # Select treated unit
+    country_options = sorted(df_panel['country'].unique())
+    default_index = 0
+    try:
+        default_index = country_options.index('France')
+    except (ValueError, AttributeError):
+        pass  # Use default index 0 if France not found
+
     treated_country = st.selectbox(
         "Select treated country (hypothetical intervention in 2021):",
-        options=sorted(df_panel['country'].unique()),
-        index=sorted(df_panel['country'].unique()).tolist().index('France')
+        options=country_options,
+        index=default_index
     )
 
     # Get data
