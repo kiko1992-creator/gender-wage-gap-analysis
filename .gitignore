@@ -36,6 +36,8 @@ notebooks/*.jpeg
 # OS
 .DS_Store
 Thumbs.db
+nul
+**/nul
 
 # Editor settings
 .claude/
