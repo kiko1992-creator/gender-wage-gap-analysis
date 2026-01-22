@@ -242,10 +242,11 @@ with tab1:
     """)
 
     # Select country for time series analysis
+    countries_list = sorted(df_panel['country'].unique().tolist())
     country_ts = st.selectbox(
         "Select country for time series analysis:",
-        options=sorted(df_panel['country'].unique()),
-        index=sorted(df_panel['country'].unique()).tolist().index('France') if 'France' in df_panel['country'].unique() else 0
+        options=countries_list,
+        index=countries_list.index('France') if 'France' in countries_list else 0
     )
 
     df_country_ts = df_panel[df_panel['country'] == country_ts].sort_values('year')
