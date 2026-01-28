@@ -18,14 +18,21 @@ notebooks/*.png
 notebooks/*.jpg
 notebooks/*.jpeg
 
-# Data (large files)
-*.csv
+# Data (Phase 1 contract)
+data/raw/
+data/processed/
+data/cleaned/
+
+# Allow only reference CSVs
+!data/reference/
+data/reference/**/*.csv
+
+# Block spreadsheets everywhere
 *.xlsx
 *.xls
-!data/raw/*.csv
-!data/raw/*.xlsx
-!data/processed/*.csv
-!data/reference/*.csv
+
+# Optional: ignore large derived exports anywhere
+*.csv
 
 # IDE
 .vscode/
